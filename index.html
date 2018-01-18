@@ -1,0 +1,138 @@
+<!--
+
+    * Remember last 5 or so to avoid repeating samples
+    * Cleanup CSS
+    * Cleanup JS
+    ? Responsive
+    ? Remove Lodash
+    ? Show answer feature
+    ==
+    * Chrono feature
+    * Weight feature (dup function)
+
+-->
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Grille d'entraînement d'opération arithmétique élémentaire</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400">
+        <style>
+            input,
+            button,
+            select,
+            body {
+                font-size: 1.2rem;
+                font-weight: 300;
+                font-family: Roboto, sans-serif;
+                min-width: 2.7em;
+            }
+            body {
+                margin-top: 0;
+            }
+            input:focus {
+                outline: 0;
+            }
+            .play button:after {
+                content: '▶';
+            }
+            .stop button:after {
+                content: '■';
+            }
+            /* content: '↻'; */
+            header {
+                display: flex;
+                justify-content: space-between;
+                background: #f0f0f0;
+                padding: 0.5em;
+            }
+            main {
+                margin: 2em 0;
+                columns: 3;
+            }
+            input {
+                width: 3em;
+                text-align: center;
+            }
+            .end {
+                margin-top: 2em;
+            }
+            .end button {
+                margin-right: 1.7em;
+            }
+            .op {
+                display: flex;
+                flex-flow: center;
+                font-size: 2em;
+                line-height: 1.7em;
+            }
+            .op .a,
+            .op .b {
+                display: inline-block;
+                width: 1em;
+                text-align: center;
+            }
+            select,
+            input {
+                font-size: 1.7rem;
+                /* width: 1rem; */
+                border: 0;
+                    background:transparent;
+                border-bottom: 2px solid #cecece;
+            }
+            .err input {
+                color: red;
+                border-bottom: 2px solid red;
+            }
+            @media print {
+                header, .end { display: none; }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div id="ctrl">
+
+                <label for="o">Opération:</label>
+                <select id="o">
+                    <option>×</option>
+                    <option>÷</option>
+                    <option>+</option>
+                    <option>-</option>
+                </select>
+
+                <label for="q">Quantité:</label>
+                <input id="q" type="number" name="q" value="20">
+
+                <label for="n">Nombres:</label>
+                <input id="n" type="text" name="n" value="0-10">
+
+                <button>
+                    ↵
+                </button>
+            </div>
+            <div id="timer" class="play">
+                <span id="secs"></span>
+                <button></button>
+            </div>
+        </header>
+
+        <main>
+            <div class="op">
+                <span class="a">a</span>
+                <span class="o">+</span>
+                <span class="b">b</span>
+                =
+                <input type="text" name="ans" value="">
+            </div>
+            <div class="end">
+                <button>Terminer</button>
+                <span id="score"></span>
+            </div>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
+
