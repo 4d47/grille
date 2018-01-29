@@ -1,0 +1,98 @@
+/*
+ *
+ */
+
+* {
+    font-family: roboto, sans-serif;
+    font-weight: 300;
+}
+body {
+    font-size: 1.2em;
+    margin-top: 0;
+}
+input,
+button,
+select {
+    font-size: inherit;
+    min-width: 3em;
+}
+input,
+select {
+    border: 0;
+    background: transparent;
+    border-bottom: 2px solid #cecece;
+    text-align: center;
+}
+input:focus,
+select:focus {
+    outline: 0;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    background: #f0f0f0;
+    padding: 0.7em;
+}
+header .field {
+    display: inline-block;
+}
+#timer.play button:after {
+    content: '▶';
+}
+#timer.stop button:after {
+    content: '■';
+}
+main {
+    padding-top: 2em;
+    columns: 3;
+    text-align: center;
+}
+main .op {
+    font-size: 2em;
+    line-height: 1.7em;
+}
+main .op .a,
+main .op .b {
+    display: inline-block;
+    min-width: 1.1em;
+}
+main .op .sign {
+    font-size: 0.6em;
+    vertical-align: top;
+}
+main .op input {
+    min-width: inherit;
+    width: 2em;
+}
+main .op.err input {
+    color: red;
+    border-bottom-color: red;
+}
+main footer {
+    margin-top: 2em;
+}
+main footer #score {
+    font-size: 1.7em;
+    padding-top: 0.7em;
+    transform: rotate(-7deg);
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+@media print {
+    header,
+    footer {
+        display: none;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .field {
+        display: block;
+        margin-top: 0.3em;
+    }
+    .field label {
+        display: inline-block;
+        min-width: 6em;
+    }
+    main {
+        columns: 1;
+    }
+}
