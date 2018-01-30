@@ -50,6 +50,7 @@ main {
 main .op {
     font-size: 2em;
     line-height: 1.7em;
+    transition: opacity 2s;
 }
 main .op .a,
 main .op .b {

@@ -94,6 +94,7 @@ function redraw() {
         ops = document.querySelectorAll('.op'),
         op = ops[0];
 
+    op.style.opacity = 0;
     score.innerHTML = '';
 
     for (i = 0; i < ops.length; i++) {
@@ -119,6 +120,11 @@ function redraw() {
         node.querySelector('input').value = '';
         node.classList.remove('err');
         main.insertBefore(node, footer);
+        (function(node) {
+            setTimeout(function() {
+                node.style.opacity = 1;
+            }, 100 * i);
+        })(node);
     }
 }
 
