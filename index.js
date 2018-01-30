@@ -3,6 +3,7 @@
 // - dans les moins ne pas aller sous zero
 // - remember from value to reload (always work on addition)
 // - mettre chrono automatiquement sous le score (en petit)
+// 
 
 var
     form = document.querySelector('form'),
@@ -105,6 +106,9 @@ function redraw() {
         prev = ab.toString();
         if (o == '÷') {
             ab[0] *= ab[1];
+        } else if (o == '-') {
+            ab.sort(function (a, b) {
+            });
         } else {
             ab = shuffle(ab);
         }
