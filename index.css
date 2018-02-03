@@ -73,11 +73,67 @@ main footer {
     margin-top: 2em;
 }
 main footer #score {
+    min-height: 150px;
     font-size: 1.7em;
     padding-top: 0.7em;
     transform: rotate(-7deg);
     font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
+/* https://github.com/una/animated-emojis
+ * https://dribbble.com/shots/1925708-Emojis
+ */
+.emojis {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-image: url(emojis.gif);
+    background-repeat: no-repeat;
+}
+.emojis--01 { background-position: -42px -48px; }
+.emojis--02 { background-position: -148px -48px; }
+.emojis--03 { background-position: -254px -48px; }
+.emojis--04 { background-position: -360px -48px; }
+.emojis--05 { background-position: -466px -48px; }
+.emojis--06 { background-position: -572px -48px; }
+.emojis--07 { background-position: -678px -48px; }
+
+.emojis--08 { background-position: -42px -154px; }
+.emojis--09 { background-position: -148px -154px; }
+.emojis--10 { background-position: -254px -154px; }
+.emojis--11 { background-position: -360px -154px; }
+.emojis--12 { background-position: -466px -154px; }
+.emojis--13 { background-position: -572px -154px; }
+.emojis--14 { background-position: -678px -154px; }
+
+.emojis--15 { background-position: -42px -260px; }
+.emojis--16 { background-position: -148px -260px; }
+.emojis--17 { background-position: -254px -260px; }
+.emojis--18 { background-position: -360px -260px; }
+.emojis--19 { background-position: -466px -260px; }
+.emojis--20 { background-position: -572px -260px; }
+.emojis--21 { background-position: -678px -260px; }
+
+.emojis--22 { background-position: -42px -366px; }
+.emojis--23 { background-position: -148px -366px; }
+.emojis--24 { background-position: -254px -366px; }
+.emojis--25 { background-position: -360px -366px; }
+.emojis--26 { background-position: -466px -366px; }
+.emojis--27 { background-position: -572px -366px; }
+.emojis--28 { background-position: -678px -366px; }
+
+.emojis--29 { background-position: -42px -472px; }
+.emojis--30 { background-position: -148px -472px; }
+.emojis--31 { background-position: -254px -472px; }
+.emojis--32 { background-position: -360px -472px; }
+.emojis--33 { background-position: -466px -472px; }
+.emojis--34 { background-position: -572px -472px; }
+.emojis--35 { background-position: -678px -472px; }
+
+
+/*
+ * Media queries
+ */
+
 @media print {
     header,
     footer {

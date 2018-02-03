@@ -10,9 +10,12 @@ var
     timer = document.querySelector('#timer'),
     secs = document.querySelector('#secs'),
     score = document.querySelector('#score'),
-    stickers = ['😏', '😎', '😉', '😊', '😋', '😺', '★', '✿'],
-    stickersColors = ['#FF851B', '#0074D9', '#FF4136', '#F012BE',
-                      '#B10DC9', '#2ECC40', '#3D9970', '#FFDC00'],
+    stickers = [
+        '01', '02', '03', '04', '05', '06', '07',
+        '08', '08', '10', '11', '12', '13', '14',
+
+              '30',       '32',       '34'
+    ],
     chronoId,
     chronoSecs;
 
@@ -67,7 +70,7 @@ function correct() {
     good = ops.length - document.querySelectorAll('.err').length;
     score.innerHTML = good + '/' + ops.length;
     if (good === ops.length) {
-        score.innerHTML += '<span style="font-size:1.8em;vertical-align:text-top;color:' + pick(stickersColors) + '">' + pick(stickers) + '</span>';
+        score.innerHTML += '<br><span class="emojis emojis--' + pick(stickers) + '"></span>';
     }
 
 }
