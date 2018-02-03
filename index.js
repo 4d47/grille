@@ -51,6 +51,7 @@ function correct() {
     var
         i,
         good,
+        main = document.querySelector('main'),
         ops = document.querySelectorAll('.op');
 
     for (i = 0; i < ops.length; i++) {
@@ -70,7 +71,7 @@ function correct() {
     good = ops.length - document.querySelectorAll('.err').length;
     score.innerHTML = good + '/' + ops.length;
     if (good === ops.length) {
-        score.innerHTML += '<br><span class="emojis emojis--' + pick(stickers) + '"></span>';
+        score.innerHTML += '<br><span class="emojis emojis--' + main.getAttribute("data-sticker-index") + '"></span>';
     }
 
 }
@@ -99,6 +100,7 @@ function redraw() {
 
     op.style.opacity = 0;
     score.innerHTML = '';
+    main.setAttribute("data-sticker-index", pick(stickers));
 
     for (i = 0; i < ops.length; i++) {
         main.removeChild(ops[i]);
