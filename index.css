@@ -64,6 +64,7 @@ main .op .sign {
 main .op input {
     min-width: inherit;
     width: 2em;
+    transition: border-bottom-color 0.7s;
 }
 main .op.err input {
     color: red;
@@ -84,50 +85,51 @@ main footer #score {
  */
 .emojis {
     display: inline-block;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     background-image: url(emojis.gif);
     background-repeat: no-repeat;
 }
-.emojis--01 { background-position: -42px -48px; }
-.emojis--02 { background-position: -148px -48px; }
-.emojis--03 { background-position: -254px -48px; }
-.emojis--04 { background-position: -360px -48px; }
-.emojis--05 { background-position: -466px -48px; }
-.emojis--06 { background-position: -572px -48px; }
-.emojis--07 { background-position: -678px -48px; }
+                                /* -106px -106px */
+.emojis--01 { background-position: -37px  -39px; }
+.emojis--02 { background-position: -143px -39px; }
+.emojis--03 { background-position: -249px -39px; }
+.emojis--04 { background-position: -355px -39px; }
+.emojis--05 { background-position: -461px -39px; }
+.emojis--06 { background-position: -567px -39px; }
+.emojis--07 { background-position: -673px -39px; }
 
-.emojis--08 { background-position: -42px -154px; }
-.emojis--09 { background-position: -148px -154px; }
-.emojis--10 { background-position: -254px -154px; }
-.emojis--11 { background-position: -360px -154px; }
-.emojis--12 { background-position: -466px -154px; }
-.emojis--13 { background-position: -572px -154px; }
-.emojis--14 { background-position: -678px -154px; }
+.emojis--08 { background-position: -37px  -145px; }
+.emojis--09 { background-position: -143px -145px; }
+.emojis--10 { background-position: -249px -145px; }
+.emojis--11 { background-position: -355px -145px; }
+.emojis--12 { background-position: -461px -145px; }
+.emojis--13 { background-position: -567px -145px; }
+.emojis--14 { background-position: -673px -145px; }
 
-.emojis--15 { background-position: -42px -260px; }
-.emojis--16 { background-position: -148px -260px; }
-.emojis--17 { background-position: -254px -260px; }
-.emojis--18 { background-position: -360px -260px; }
-.emojis--19 { background-position: -466px -260px; }
-.emojis--20 { background-position: -572px -260px; }
-.emojis--21 { background-position: -678px -260px; }
+.emojis--15 { background-position: -37px  -251px; }
+.emojis--16 { background-position: -143px -251px; }
+.emojis--17 { background-position: -249px -251px; }
+.emojis--18 { background-position: -355px -251px; }
+.emojis--19 { background-position: -461px -251px; }
+.emojis--20 { background-position: -567px -251px; }
+.emojis--21 { background-position: -673px -251px; }
 
-.emojis--22 { background-position: -42px -366px; }
-.emojis--23 { background-position: -148px -366px; }
-.emojis--24 { background-position: -254px -366px; }
-.emojis--25 { background-position: -360px -366px; }
-.emojis--26 { background-position: -466px -366px; }
-.emojis--27 { background-position: -572px -366px; }
-.emojis--28 { background-position: -678px -366px; }
+.emojis--22 { background-position: -37px  -357px; }
+.emojis--23 { background-position: -143px -357px; }
+.emojis--24 { background-position: -249px -357px; }
+.emojis--25 { background-position: -355px -357px; }
+.emojis--26 { background-position: -461px -357px; }
+.emojis--27 { background-position: -567px -357px; }
+.emojis--28 { background-position: -673px -357px; }
 
-.emojis--29 { background-position: -42px -472px; }
-.emojis--30 { background-position: -148px -472px; }
-.emojis--31 { background-position: -254px -472px; }
-.emojis--32 { background-position: -360px -472px; }
-.emojis--33 { background-position: -466px -472px; }
-.emojis--34 { background-position: -572px -472px; }
-.emojis--35 { background-position: -678px -472px; }
+.emojis--29 { background-position: -37px  -463px; }
+.emojis--30 { background-position: -143px -463px; }
+.emojis--31 { background-position: -249px -463px; }
+.emojis--32 { background-position: -355px -463px; }
+.emojis--33 { background-position: -461px -463px; }
+.emojis--34 { background-position: -567px -463px; }
+.emojis--35 { background-position: -673px -463px; }
 
 
 /*
