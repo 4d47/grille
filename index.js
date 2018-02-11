@@ -1,32 +1,118 @@
-//
-// - onclick selection le nombre (pour corriger plus facilement)
-// - dans les moins ne pas aller sous zero
-// - remember from value to reload (always work on addition)
-// - mettre chrono automatiquement sous le score (en petit)
-// 
 
-var
-    form = document.querySelector('form'),
+const
+    main = document.querySelector('main'),
+    footer = document.querySelector('footer'),
     timer = document.querySelector('#timer'),
     secs = document.querySelector('#secs'),
-    score = document.querySelector('#score'),
-    stickers = [
-        '01', '02', '03', '04', '05', '06', '07',
-        '08', '08', '10', '11', '12', '13', '14',
-
-              '30',       '32',       '34'
-    ],
-    chronoId,
-    chronoSecs;
+    score = document.querySelector('#score');
 
 
+// initialize event handlers
+document.ctrl.addEventListener('submit', onFormSubmit);
+timer.querySelector('button').addEventListener('click', onChronoClick); 
+document.ctrl.querySelector('.print').addEventListener('click', onPrintClick);
+footer.querySelector('button').addEventListener('click', onCompleteClick); 
+document.addEventListener('DOMContentLoaded', redraw);
+document.ctrl.opr.forEach(function(el) {
+    // prevent last checkbox to be unchecked
+    el.addEventListener('change', function(e) {
+        if (document.ctrl.querySelectorAll(':checked').length === 0) {
+            el.checked = true;
+        }
+    });
+});
+
+// redraw operation nodes based on user form input
+function redraw() {
+    const
+        qty = parseInt(document.ctrl.elements.qty.value),
+        nos = parseNumbers(document.ctrl.elements.nos.value),
+        xs  = weight(parseNumbers('0-10'));
+    var
+        i,
+        node,
+        ab,
+        prevAb = '',
+        opr,
+        ops = main.querySelectorAll('.op'),
+        op = ops[0];
+
+    op.style.opacity = 0;
+    score.innerHTML = '';
+    main.dataset.sticker = pick(main.dataset.stickers.split(','));
+    ops.forEach(main.removeChild.bind(main));
+
+    for (i = 0; i < qty; i++) {
+        do {
+            ab =  [pick(xs), pick(nos)];
+        } while (ab.toString() === prevAb.toString());
+        prevAb = ab.toString();
+        opr = pick(document.ctrl.querySelectorAll('[name=opr]:checked')).value;
+        // opr = pick(oprSelector.selected).value;
+        if (opr === '÷') {
+            // make `xs` the answer
+            ab[0] *= ab[1];
+        } else if (opr === '-') {
+            // largest number first to never go negative
+            ab.sort(function (a, b) {
+                return b - a;
+            });
+        } else {
+            ab = shuffle(ab);
+        }
+        node = op.cloneNode(true);
+        node.querySelector('.o').innerHTML = opr;
+        node.querySelector('.a').innerHTML = ab[0];
+        node.querySelector('.b').innerHTML = ab[1];
+        node.querySelector('input').value = '';
+        node.classList.remove('err');
+        main.insertBefore(node, footer);
+        (function(node) {
+            // fade in tumble effect
+            setTimeout(function() {
+                node.style.opacity = 1;
+            }, 100 * i);
+        })(node);
+    }
+}
+
+// mark invalid operations and show score
+function correct() {
+    const
+        ops = main.querySelectorAll('.op');
+    var
+        input,
+        points = 0;
+
+    ops.forEach(function(op) {
+        var
+            a = parseInt(op.querySelector('.a').innerHTML),
+            b = parseInt(op.querySelector('.b').innerHTML),
+            ans = parseInt(op.querySelector('input').value),
+            opr = op.querySelector('.o').innerHTML;
+        if (calc(a, opr, b) !== ans) {
+            op.classList.add('err');
+            op.querySelector('input').value = '';
+        } else {
+            points++;
+            op.classList.remove('err');
+        }
+    });
+    if (input = main.querySelector('.op.err input')) {
+        input.focus();
+    }
+    score.innerHTML = points + '/' + ops.length;
+    if (points === ops.length) {
+        score.innerHTML += '<br><span class="emojis emojis--' + main.dataset.sticker + '"></span>';
+    }
+}
 
 // parse a `s` comma separated list of numbers
 // and ranges to an array of integers.
 function parseNumbers(s) {
     result = [];
     s.split(',').forEach(function(x) {
-        if (m = x.match(/(\d+)\-(\d+)/)) {
+        if (m = x.match(/(\d+)\s*\-\s*(\d+)/)) {
             for (i = parseInt(m[1]); i <= m[2]; i++) {
                 result.push(i);
             }
@@ -34,103 +120,30 @@ function parseNumbers(s) {
             result.push(parseInt(x));
         }
     });
-    return result.filter(function(v, i, s) { return s.indexOf(v) === i; });
+    return result.filter(indexAt);
+}
+
+// test that the first `v` in `s` is at index `i`
+function indexAt(v, i, s) {
+    return s.indexOf(v) === i;
 }
 
 // perform elementry arithmetic
-function calc(a, o, b) {
-    if (o == '×') return a * b;
-    if (o == '÷') return a / b;
-    if (o == '+') return a + b;
-    if (o == '-') return a - b;
-    throw 'Unsupported operation';
-}
-
-// check every operations and toggle err class for unequal values
-function correct() {
-    var
-        i,
-        good,
-        main = document.querySelector('main'),
-        ops = document.querySelectorAll('.op');
-
-    for (i = 0; i < ops.length; i++) {
-        var
-            a = parseInt(ops[i].querySelector('.a').innerHTML),
-            o = ops[i].querySelector('.o').innerHTML,
-            b = parseInt(ops[i].querySelector('.b').innerHTML),
-            ans = parseInt(ops[i].querySelector('input').value);
-        if (calc(a, o, b) != ans) {
-            ops[i].classList.add('err');
-            ops[i].querySelector('input').value = '';
-        } else {
-            ops[i].classList.remove('err');
-        }
+function calc(a, opr, b) {
+    switch (opr) {
+        case '×': return a * b;
+        case '÷': return a / b;
+        case '+': return a + b;
+        case '-': return a - b;
+        default: throw 'Unsupported operation';
     }
-
-    good = ops.length - document.querySelectorAll('.err').length;
-    score.innerHTML = good + '/' + ops.length;
-    if (good === ops.length) {
-        score.innerHTML += '<br><span class="emojis emojis--' + main.getAttribute("data-sticker-index") + '"></span>';
-    }
-
 }
 
 // weight out easy numbers so they dont appear so often
-function weight(xs) {
-    return xs.reduce(function (acc, value, index, array) {
+function weight(nos) {
+    return nos.reduce(function (acc, value, index, array) {
         return acc.concat([0,1,10].includes(value) ? [value] : [value, value, value, value]);
     }, []);
-}
-
-// redraw operations based on user form input
-function redraw() {
-    var
-        i, node,
-        main = document.querySelector('main'),
-        footer = document.querySelector('footer'),
-        o = document.querySelector('#o').value,
-        q = parseInt(document.querySelector('#q').value),
-        xs = parseNumbers(document.querySelector('#n').value),
-        ten = weight(parseNumbers(o == '÷' ? '0-12' : '0-10')),
-        ab,
-        prev = '',
-        ops = document.querySelectorAll('.op'),
-        op = ops[0];
-
-    op.style.opacity = 0;
-    score.innerHTML = '';
-    main.setAttribute("data-sticker-index", pick(stickers));
-
-    for (i = 0; i < ops.length; i++) {
-        main.removeChild(ops[i]);
-    }
-    for (i = 0; i < q; i++) {
-        do {
-            ab =  [pick(ten), pick(xs)];
-        } while (ab.toString() == prev.toString());
-        prev = ab.toString();
-        if (o == '÷') {
-            ab[0] *= ab[1];
-        } else if (o == '-') {
-            ab.sort(function (a, b) {
-            });
-        } else {
-            ab = shuffle(ab);
-        }
-        node = op.cloneNode(true);
-        node.querySelector('.o').innerHTML = o;
-        node.querySelector('.a').innerHTML = ab[0];
-        node.querySelector('.b').innerHTML = ab[1];
-        node.querySelector('input').value = '';
-        node.classList.remove('err');
-        main.insertBefore(node, footer);
-        (function(node) {
-            setTimeout(function() {
-                node.style.opacity = 1;
-            }, 100 * i);
-        })(node);
-    }
 }
 
 // pick a random value out of an array
@@ -158,22 +171,24 @@ function mmss(secs) {
     return new Date(1000 * secs).toISOString().substr(14, 5);
 }
 
+// puts the chrono widget in stop state
 function chronoStop() {
     timer.className = 'play';
-    clearInterval(chronoId);
-    chronoId = null;
+    clearInterval(timer.dataset.chronoId);
+    delete timer.dataset.chronoId;
 }
 
+// puts the chrono widget in start state
 function chronoStart() {
+    var chronoSecs = 0;
     timer.className = 'stop';
-    chronoSecs = 0;
-    chronoId = setInterval(function() {
+    timer.dataset.chronoId = setInterval(function() {
         secs.innerHTML = mmss(++chronoSecs);
     }, 1000);
 }
 
 function onChronoClick() {
-    chronoId ? chronoStop() : chronoStart();
+    timer.dataset.chronoId ? chronoStop() : chronoStart();
 }
 
 function onCompleteClick() {
@@ -181,23 +196,16 @@ function onCompleteClick() {
     correct();
 }
 
-function onPrint(e) {
+function onPrintClick(e) {
     e.preventDefault();
     window.print();
 }
 
-function onSubmit(e) {
+function onFormSubmit(e) {
     e.preventDefault();
-    if (!form.checkValidity()) {
+    if (!document.ctrl.checkValidity()) {
         return;
     }
     chronoStop();
     redraw();
 }
-
-// initialize event handlers
-form.addEventListener('submit', onSubmit);
-document.querySelector('#timer button').addEventListener('click', onChronoClick); 
-document.querySelector('form .print').addEventListener('click', onPrint);
-document.querySelector('footer button').addEventListener('click', onCompleteClick); 
-document.addEventListener('DOMContentLoaded', redraw);

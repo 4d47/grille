@@ -27,6 +27,21 @@ input:focus,
 select:focus {
     outline: 0;
 }
+.toggle input {
+    display: none;
+}
+.toggle label {
+    display: inline-block;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    color: #637280;
+    cursor: pointer;
+    padding: 0.5em 1em;
+}
+.toggle input:checked + label {
+    color: #fff;
+    background-color: #545969;
+}
 header {
     display: flex;
     justify-content: space-between;
@@ -80,6 +95,7 @@ main footer #score {
     transform: rotate(-7deg);
     font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
+
 /* https://github.com/una/animated-emojis
  * https://dribbble.com/shots/1925708-Emojis
  */
@@ -130,7 +146,6 @@ main footer #score {
 .emojis--33 { background-position: -461px -463px; }
 .emojis--34 { background-position: -567px -463px; }
 .emojis--35 { background-position: -673px -463px; }
-
 
 /*
  * Media queries

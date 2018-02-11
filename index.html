@@ -5,27 +5,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Grille d'arithmétique élémentaire</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
-        <link rel="stylesheet" href="index.css?v4">
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
         <header>
-            <form>
+            <form name="ctrl">
                 <div class="field">
-                    <label for="o">Opération:</label>
-                    <select id="o">
-                        <option>×</option>
-                        <option>÷</option>
-                        <option>+</option>
-                        <option>-</option>
-                    </select>
+                    <span class="toggle">
+                        <input id="mult" type="checkbox" name="opr" value="×" checked>
+                        <label for="mult">×</label>
+                    </span>
+                    <span class="toggle">
+                        <input id="div" type="checkbox" name="opr" value="÷">
+                        <label for="div">÷</label>
+                    </span>
+                    <span class="toggle">
+                        <input id="add" type="checkbox" name="opr" value="+">
+                        <label for="add">+</label>
+                    </span>
+                    <span class="toggle">
+                        <input id="subs" type="checkbox" name="opr" value="-">
+                        <label for="subs">-</label>
+                    </span>
                 </div>
                 <div class="field">
-                    <label for="q">Quantité:</label>
-                    <input id="q" type="text" name="q" pattern="\s*\d*\s*" size="4" value="15">
+                    <label for="qty">Quantité:</label>
+                    <input id="qty" type="text" name="qty" pattern="\s*\d*\s*" size="4" value="15">
                 </div>
                 <div class="field">
-                    <label for="n">Nombres:</label>
-                    <input id="n" type="text" name="n" pattern="\s*(\d+(\s*[,\-]\s*\1)?)*\s*" size="4" value="0-10">
+                    <label for="nos">Nombres:</label>
+                    <input id="nos" type="text" name="nos" pattern="\s*(\d+(\s*[,\-]\s*\1)?)*\s*" size="4" value="1-10">
                 </div>
                 <div class="field">
                     <button>
@@ -42,7 +51,9 @@
             </div>
         </header>
 
-        <main>
+        
+        <main
+            data-stickers="01,02,03,04,05,06,07,08,08,10,11,12,13,14,30,32,34">
             <div class="op">
                 <span class="a">a</span>
                 <span class="o sign">+</span>
@@ -56,6 +67,6 @@
             </footer>
         </main>
 
-        <script src="index.js?v7"></script>
+        <script src="index.js"></script>
     </body>
 </html>
