@@ -1,5 +1,5 @@
 
-const
+var
     main = document.querySelector('main'),
     footer = document.querySelector('footer'),
     timer = document.querySelector('#timer'),
@@ -8,15 +8,15 @@ const
 
 
 // initialize event handlers
-document.ctrl.addEventListener('submit', onFormSubmit);
 timer.querySelector('button').addEventListener('click', onChronoClick); 
-document.ctrl.querySelector('.print').addEventListener('click', onPrintClick);
 footer.querySelector('button').addEventListener('click', onCompleteClick); 
 document.addEventListener('DOMContentLoaded', redraw);
-document.ctrl.opr.forEach(function(el) {
+document.form.addEventListener('submit', onFormSubmit);
+document.form.querySelector('.print').addEventListener('click', onPrintClick);
+document.form.opr.forEach(function(el) {
     // prevent last checkbox to be unchecked
     el.addEventListener('change', function(e) {
-        if (document.ctrl.querySelectorAll(':checked').length === 0) {
+        if (document.form.querySelectorAll(':checked').length === 0) {
             el.checked = true;
         }
     });
@@ -24,11 +24,10 @@ document.ctrl.opr.forEach(function(el) {
 
 // redraw operation nodes based on user form input
 function redraw() {
-    const
-        qty = parseInt(document.ctrl.elements.qty.value),
-        nos = parseNumbers(document.ctrl.elements.nos.value),
-        xs  = weight(parseNumbers('0-10'));
     var
+        qty = parseInt(document.form.elements.qty.value),
+        nos = parseNumbers(document.form.elements.nos.value),
+        xs  = weight(parseNumbers('0-10')),
         i,
         node,
         ab,
@@ -47,7 +46,7 @@ function redraw() {
             ab =  [pick(xs), pick(nos)];
         } while (ab.toString() === prevAb.toString());
         prevAb = ab.toString();
-        opr = pick(document.ctrl.querySelectorAll('[name=opr]:checked')).value;
+        opr = pick(document.form.querySelectorAll(':checked')).value;
         // opr = pick(oprSelector.selected).value;
         if (opr === '÷') {
             // make `xs` the answer
@@ -78,9 +77,8 @@ function redraw() {
 
 // mark invalid operations and show score
 function correct() {
-    const
-        ops = main.querySelectorAll('.op');
     var
+        ops = main.querySelectorAll('.op');
         input,
         points = 0;
 
@@ -203,7 +201,7 @@ function onPrintClick(e) {
 
 function onFormSubmit(e) {
     e.preventDefault();
-    if (!document.ctrl.checkValidity()) {
+    if (!document.form.checkValidity()) {
         return;
     }
     chronoStop();
