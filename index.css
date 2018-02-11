@@ -162,10 +162,6 @@ main footer #score {
         display: block;
         margin-top: 0.3em;
     }
-    .field label {
-        display: inline-block;
-        min-width: 6em;
-    }
     main {
         columns: 1;
     }
