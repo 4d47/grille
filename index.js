@@ -78,7 +78,7 @@ function redraw() {
 // mark invalid operations and show score
 function correct() {
     var
-        ops = main.querySelectorAll('.op');
+        ops = main.querySelectorAll('.op'),
         input,
         points = 0;
 
