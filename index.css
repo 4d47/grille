@@ -157,6 +157,11 @@ main footer #score {
         display: none;
     }
 }
+@media only screen and (max-width: 800px) {
+    main {
+        columns: 2;
+    }
+}
 @media only screen and (max-width: 600px) {
     .field {
         display: block;
