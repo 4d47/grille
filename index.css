@@ -101,8 +101,8 @@ main footer #score {
  */
 .emojis {
     display: inline-block;
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     background-image: url(emojis.gif);
     background-repeat: no-repeat;
 }
