@@ -178,11 +178,14 @@ function chronoStop() {
 
 // puts the chrono widget in start state
 function chronoStart() {
-    var chronoSecs = 0;
+    var
+      chronoSecs = 0,
+      tick = function() {
+        secs.innerHTML = mmss(chronoSecs++);
+      };
+    tick();
     timer.className = 'stop';
-    timer.dataset.chronoId = setInterval(function() {
-        secs.innerHTML = mmss(++chronoSecs);
-    }, 1000);
+    timer.dataset.chronoId = setInterval(tick, 1000);
 }
 
 function onChronoClick() {
