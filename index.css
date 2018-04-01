@@ -48,7 +48,8 @@ header {
     background: #f0f0f0;
     padding: 0.7em;
 }
-header .field {
+header .field,
+#timer {
     display: inline-block;
 }
 #timer.play button:after {
@@ -86,9 +87,11 @@ main .op.err input {
     border-bottom-color: red;
 }
 main footer {
+    break-inside: avoid;
     margin-top: 2em;
 }
-main footer #score {
+main footer output[name="score"] {
+    display: block;
     min-height: 150px;
     font-size: 1.7em;
     padding-top: 0.7em;

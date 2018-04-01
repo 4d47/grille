@@ -7,24 +7,24 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
         <link rel="stylesheet" href="index.css">
     </head>
-    <body>
+    <body onload="ctrl.elements.enter.click()">
         <header>
-            <form name="form">
+            <form name="ctrl" onsubmit="onCtrlSubmit(event)">
                 <div class="field">
                     <span class="toggle">
-                        <input id="mult" type="checkbox" name="opr" value="×" checked>
+                        <input id="mult" type="checkbox" name="opr" value="×" onchange="onChangeStopLastUncheck(event)" checked>
                         <label for="mult">×</label>
                     </span>
                     <span class="toggle">
-                        <input id="div" type="checkbox" name="opr" value="÷">
+                        <input id="div" type="checkbox" name="opr" value="÷" onchange="onChangeStopLastUncheck(event)">
                         <label for="div">÷</label>
                     </span>
                     <span class="toggle">
-                        <input id="add" type="checkbox" name="opr" value="+">
+                        <input id="add" type="checkbox" name="opr" value="+" onchange="onChangeStopLastUncheck(event)">
                         <label for="add">+</label>
                     </span>
                     <span class="toggle">
-                        <input id="subs" type="checkbox" name="opr" value="-">
+                        <input id="subs" type="checkbox" name="opr" value="-" onchange="onChangeStopLastUncheck(event)">
                         <label for="subs">-</label>
                     </span>
                 </div>
@@ -37,34 +37,34 @@
                     <input id="nos" type="text" name="nos" pattern="\s*(\d+(\s*[,\-]\s*\1)?)*\s*" required size="4" value="1-10">
                 </div>
                 <div class="field">
-                    <button>
+                    <button name="enter">
                         ↵
                     </button>
-                    <button class="print">
+                    <button class="print" onclick="onPrintClick(event)">
                         ⎙
                     </button>
                 </div>
+                <div id="timer" class="play">
+                    <output name="secs">00:00</output>
+                    <button onclick="onChronoClick(event)"></button>
+                </div>
             </form>
-            <div id="timer" class="play">
-                <span id="secs"></span>
-                <button></button>
-            </div>
         </header>
-
         
-        <main
-            data-stickers="01,02,03,04,05,06,07,08,09,10,11,12,13,14,30,32,34">
-            <div class="op">
-                <span class="a">a</span>
-                <span class="o sign">+</span>
-                <span class="b">b</span>
-                <span class="sign">=</span>
-                <input type="text" name="ans" size="2" value="">
-            </div>
-            <footer>
-                <button>Terminer</button>
-                <div id="score"></div>
-            </footer>
+        <main>
+            <form name="grid" data-stickers="01 02 03 04 05 06 07 08 09 10 11 12 13 14 30 32 34">
+                <div class="op">
+                    <output name="a" class="a">a</output>
+                    <span class="o sign">+</span>
+                    <span class="b">b</span>
+                    <span class="sign">=</span>
+                    <input type="text" name="ans" size="2" value="">
+                </div>
+                <footer>
+                    <button onclick="onCompleteClick(event)">Terminer</button>
+                    <output name="score"></output>
+                </footer>
+            </form>
         </main>
 
         <script src="polyfill.js"></script>
