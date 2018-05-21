@@ -90,11 +90,16 @@ main footer {
     break-inside: avoid;
     margin-top: 2em;
 }
+main footer output[name="timer"] {
+    display: block;
+    font-size: 1em;
+    padding-top: 0.5em;
+}
 main footer output[name="score"] {
     display: block;
+    padding-top: 0.5em;
     min-height: 150px;
     font-size: 1.7em;
-    padding-top: 0.7em;
     transform: rotate(-7deg);
     font-family: "Comic Sans MS", "Comic Sans", cursive;
 }

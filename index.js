@@ -18,15 +18,12 @@
  * Event handlers
  *   onChangeStopLastUncheck
  *   onCtrlSubmit
- *   onPrintClick
- *   onChronoClick
+ *   onAnsKeyUp
  *   onCompleteClick
  *
  * Operations
  *   redraw
  *   correct
- *   chronoStop
- *   chronoStart
  *
  * Utilities
  *   parseNumbers
@@ -43,7 +40,6 @@
  * Event handlers
  */
 
-// Reset target checked when checked count goes to zero
 function onChangeStopLastUncheck(e) {
     if (e.target.form.querySelectorAll('[name="' + e.target.name + '"]:checked').length == 0) {
         e.target.checked = true;
@@ -55,28 +51,39 @@ function onCtrlSubmit(e) {
     if (!document.ctrl.checkValidity()) {
         return;
     }
-    chronoStop(document.ctrl.lastElementChild);
+    document.grid.reset();
     redraw(document.ctrl, document.grid);
+    document.grid.ans[0].focus();
 }
 
-function onPrintClick(e) {
-    e.preventDefault();
-    window.print();
+function onGridReset(e) {
+    clearInterval(document.grid.dataset.chronoId);
+    delete document.grid.dataset.chronoId;
 }
 
-function onChronoClick(e) {
-    var timer = document.ctrl.lastElementChild;
-    e.preventDefault();
-    if (timer.dataset.chronoId) {
-        chronoStop(timer);
-    } else {
-        chronoStart(timer, document.ctrl.secs);
+function onAnsKeyUp(e) {
+    var
+      disabled = false,
+      len = 0;
+    document.grid.ans.forEach(function(n) {
+        len += n.value.length;
+        if (n.value === '') {
+            disabled = true;
+        }
+    });
+    if (len === 1 && !document.grid.dataset.chronoId) {
+        document.grid.dataset.chronoSecs = 0;
+        document.grid.dataset.chronoId = setInterval(function() {
+            document.grid.dataset.chronoSecs++;
+        }, 1000);
     }
+    document.grid.complete.disabled = disabled;
 }
 
 function onCompleteClick(e) {
     e.preventDefault();
-    chronoStop(document.ctrl.lastElementChild);
+    clearInterval(document.grid.dataset.chronoId);
+    delete document.grid.dataset.chronoId;
     correct(document.grid);
 }
 
@@ -100,8 +107,11 @@ function redraw(ctrl, grid) {
         op = ops[0];
 
     op.style.opacity = 0;
+    grid.complete.disabled = true;
     grid.score.innerHTML = '';
+    grid.timer.innerHTML = '';
     grid.dataset.currentSticker = pick(grid.dataset.stickers.split(' '));
+
     ops.forEach(grid.removeChild.bind(grid));
 
     for (i = 0; i < qty; i++) {
@@ -165,28 +175,10 @@ function correct(grid) {
         input.focus();
     }
     grid.score.innerHTML = points + '/' + ops.length;
+    grid.timer.innerHTML = mmss(grid.dataset.chronoSecs);
     if (points === ops.length) {
         grid.score.innerHTML += '<br><span class="emojis emojis--' + grid.dataset.currentSticker + '"></span>';
     }
-}
-
-// Puts the timer in stop state
-function chronoStop(timer) {
-    timer.className = 'play';
-    clearInterval(timer.dataset.chronoId);
-    delete timer.dataset.chronoId;
-}
-
-// Puts the timer in start state
-function chronoStart(timer, secs) {
-    var
-        chronoSecs = 0,
-        tick = function() {
-            secs.innerHTML = mmss(chronoSecs++);
-        };
-    tick();
-    timer.className = 'stop';
-    timer.dataset.chronoId = setInterval(tick, 1000);
 }
 
 
@@ -255,3 +247,4 @@ function shuffle(a) {
 function mmss(secs) {
     return new Date(1000 * secs).toISOString().substr(14, 5);
 }
+
