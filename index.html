@@ -30,11 +30,11 @@
                 </div>
                 <div class="field">
                     <label for="qty">Quantité:</label>
-                    <input id="qty" type="text" name="qty" pattern="\s*\d*\s*" required size="4" value="15">
+                    <input id="qty" type="text" name="qty" autocomplete="off" pattern="\s*\d*\s*" required size="4" value="15">
                 </div>
                 <div class="field">
                     <label for="nos">Nombres:</label>
-                    <input id="nos" type="text" name="nos" pattern="\s*(\d+(\s*[,\-]\s*\1)?)*\s*" required size="4" value="1-10">
+                    <input id="nos" type="text" name="nos" autocomplete="off" pattern="\s*(\d+(\s*[,\-]\s*\1)?)*\s*" required size="4" value="1-10">
                 </div>
                 <div class="field">
                     <button name="enter">
@@ -51,7 +51,7 @@
                     <span class="o sign">+</span>
                     <span class="b">b</span>
                     <span class="sign">=</span>
-                    <input type="text" name="ans" size="2" value="" onkeyup="onAnsKeyUp(event)">
+                    <input type="text" name="ans" size="2" value="" autocomplete="off" onkeyup="onAnsKeyUp(event)">
                 </div>
                 <footer>
                     <button name="complete" onclick="onCompleteClick(event)">Terminer</button>
