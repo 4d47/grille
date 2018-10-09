@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Grille d'arithmétique élémentaire</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+        <link rel="stylesheet" href="animate.css">
         <link rel="stylesheet" href="index.css">
     </head>
     <body onload="ctrl.elements.enter.click()">
@@ -45,7 +46,11 @@
         </header>
         
         <main>
-            <form name="grid" data-stickers="01 02 03 04 05 06 07 08 09 10 11 12 13 14 30 32 34" onreset="onGridReset(event)">
+            <form
+                name="grid"
+                onreset="onGridReset(event)"
+                data-stickers="01 02 03 04 05 06 07 08 09 10 11 12 13 14 30 32 34"
+                data-animations="bounce rubberBand shake swing tada wobble jello bounceIn flip lightSpeedIn rotateIn jackInTheBox rollIn">
                 <div class="op">
                     <output name="a" class="a">a</output>
                     <span class="o sign">+</span>

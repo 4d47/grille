@@ -111,6 +111,7 @@ function redraw(ctrl, grid) {
     grid.score.innerHTML = '';
     grid.timer.innerHTML = '';
     grid.dataset.currentSticker = pick(grid.dataset.stickers.split(' '));
+    grid.dataset.currentAnimation = pick(grid.dataset.animations.split(' '));
 
     ops.forEach(grid.removeChild.bind(grid));
 
@@ -177,7 +178,7 @@ function correct(grid) {
     grid.score.innerHTML = points + '/' + ops.length;
     grid.timer.innerHTML = mmss(grid.dataset.chronoSecs);
     if (points === ops.length) {
-        grid.score.innerHTML += '<br><span class="emojis emojis--' + grid.dataset.currentSticker + '"></span>';
+        grid.score.innerHTML += '<br><span class="animated ' + grid.dataset.currentAnimation + ' emojis emojis--' + grid.dataset.currentSticker + '"></span>';
     }
 }
 
