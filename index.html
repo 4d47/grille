@@ -67,23 +67,5 @@
 
         <script src="polyfill.js"></script>
         <script src="index.js"></script>
-        <script>
-        (function (d, s) {
-          var x, h, n = Date.now()
-          tc = function (p) {
-            m = s.getItem('_tcx') > n ? s.getItem('_tch') : 'cold-wildflower'
-            x = new XMLHttpRequest()
-            x.addEventListener('load', function () {
-              if (x.status == 200) {
-                s.setItem('_tch', x.responseText)
-                s.setItem('_tcx', n + 14400000)
-              }
-            })
-            x.open('GET', 'https://t.trackingco.de/'+m+'.xml?r='+d.referrer+(p?'&p='+p:''))
-            x.send()
-          }
-          tc()
-        })(document, localStorage)
-        </script>
     </body>
 </html>
