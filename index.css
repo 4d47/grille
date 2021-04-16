@@ -83,6 +83,8 @@ main {
 main .op {
     font-size: 2em;
     line-height: 1.7em;
+}
+main .op, main footer {
     transition: opacity 1.7s;
 }
 main .op .a,
@@ -194,5 +196,14 @@ main footer output[name="score"] {
     }
     main {
         columns: 1;
+    }
+    .toggle label {
+        padding: 0.2em 0.5em;
+    }
+    .field label[for="qty"], .field label[for="nos"] {
+        display:none;
+    }
+    .field input[name="qty"], .field input[name="nos"] {
+        width:2em;
     }
 }
