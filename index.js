@@ -1,5 +1,5 @@
 /*
- * This script is written in plain (and hopefully simple) JavaScript.
+ * This script is written in plain (and hopefully simple) JavaScript (ES2019).
  * The guiding principles are:
  *
  * - JavaScript only contains function definitions
