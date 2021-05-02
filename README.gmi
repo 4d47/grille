@@ -1,0 +1,8 @@
+
+# Grille
+
+This is a quick and simple math worksheets generator written in plain, modern (ES2019) JavaScript.  But fear not, it also make use of the very bad bad practice of inline events.
+
+=> https://4d47.github.io/grille
+=> https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#inline_event_handlers_%E2%80%94_dont_use_these  inline events considered harmful
+
